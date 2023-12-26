@@ -8,14 +8,36 @@
     <link rel="icon" href="img/BBZ BL.jpeg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+       <!-- <style>
+             CSS für den Hover-Effekt
+            button.navbar-brand:hover {
+                background-color: #343a40; /* Hintergrundfarbe bei Hover 
+                color: #ffffff; /* Textfarbe bei Hover 
+            }
+        </style> -->
+        <style>
+            /* Benutzerdefinierte Styles für den "Startseite"-Button */
+            #StartseiteButton {
+                background-color: inherit;
+                border: none;
+                padding: 0;
+                font-size: 1rem; /* Stelle sicher, dass die Schriftgröße die gleiche ist wie bei anderen Nav-Elementen */
+            }
+    
+            #StartseiteButton:hover {
+                background-color: #343a40; /* Hintergrundfarbe bei Hover */
+                color: #ffffff; /* Textfarbe bei Hover */
+            }
+        </style>
 </head>
 
 <body>
-
+    <script src="./projektarbeit.js" defer></script>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="#">Startseite</a>
+            <button class="navbar-brand" id="StartseiteButton" href="#">Startseite</button>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -25,7 +47,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                    <li class="nav-item"> 
                     <li class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -33,7 +55,7 @@
 
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Stundenplan</a></li>
-                            
+                        </li>
                                <!-- Split dropdown in two  <hr class="dropdown-divider"> 
                             </li> --> 
                                 <!-- Second dropdown
@@ -46,7 +68,6 @@
                     </li>
                     <a class="nav-link active" aria-current="page" href="#"> Über uns </a>
 
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Mein Konto</a>
                     </li>
@@ -61,6 +82,23 @@
     </nav>
 
     <h1>Hi</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
