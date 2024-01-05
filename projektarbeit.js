@@ -4,5 +4,10 @@ const ApiTafel = "http://sandbox.gibm.ch/tafel.php"; //Example could look like h
 
 StartseiteButton.addEventListener('mouseover', () => {
     // Change the button's background color
-    StartseiteButton.style.backgroundColor = 'blue';
+    StartseiteButton.style.color = 'lightgreen';
+  });
+
+  StartseiteButton.addEventListener('mouseout', () => {
+    // Change the button's background color
+    StartseiteButton.style.color = 'white';
   });
