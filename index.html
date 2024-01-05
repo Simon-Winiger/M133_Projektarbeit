@@ -9,32 +9,51 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-       <!-- <style>
+    <!-- <style>
              CSS für den Hover-Effekt
             button.navbar-brand:hover {
                 background-color: #343a40; /* Hintergrundfarbe bei Hover 
                 color: #ffffff; /* Textfarbe bei Hover 
             }
         </style> -->
-        
+
     <style>
-            #StartseiteButton {
-                background-color: inherit;
-                border: none;
-                padding: 0;
-                font-size: 1rem; 
-            }
-    
-            #StartseiteButton:hover {
-                background-color: #343a40; 
-                color: #ffffff; }
-        </style>
+        #StartseiteButton {
+            background-color: inherit;
+            border: none;
+            padding: 0;
+            font-size: 1rem;
+        }
+
+        #StartseiteButton:hover {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+
+        .centered-Stundenplan {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 10vh;
+            text-align: center;
+        }
+
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            height: 15vh;
+            gap: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <script src="./projektarbeit.js" defer></script>
+    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
+        <div class="container-fluid" id="NavigationBar">
 
             <button class="navbar-brand" id="StartseiteButton" href="#">Startseite</button>
 
@@ -46,7 +65,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"> 
+                    <li class="nav-item">
                     <li class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -54,33 +73,57 @@
 
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Stundenplan</a></li>
-                        </li>
-                               <!-- Split dropdown in two  <hr class="dropdown-divider"> 
-                            </li> --> 
-                                <!-- Second dropdown
+                    </li>
+                    <!-- Split dropdown in two  <hr class="dropdown-divider"> 
+                            </li> -->
+                    <!-- Second dropdown
                             <li><a class="dropdown-item" href="#"> Bli Bla Blu </a></li> 
                         -->
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Weiterbildung</a>
-                    </li>
-                    <a class="nav-link active" aria-current="page" href="#"> Über uns </a>
+                </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Weiterbildung</a>
+                </li>
+                <a class="nav-link active" aria-current="page" href="#"> Über uns </a>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Mein Konto</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Mein Konto</a>
+                </li>
                 </ul>
 
                 <!--<form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
-                </form> --> 
+                </form> -->
             </div>
         </div>
     </nav>
+    <div class="centered-Stundenplan">
+        <h1> Stundenplan BBZBL </h1>
+    </div>
+    <div class="centered-container">
 
-    <h1>Hi</h1>
+        <br>
+        <div>
+            <label for="Berufsgruppe">
+                <h2>Berufsgruppe</h2>
+            </label> <br>
+            <select id="Berufsgruppe" name="Berufsgruppe">
+                <option value="0">Bitte wählen</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <label for="Klassenauswahl">
+                <h2>Klassenauswahl</h2>
+            </label> <br>
+            <select id="Klassenauswahl" name="Klassenauswahl">
+                <option value="0">Bitte wählen</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="StundenplanInfo"></div>
 
 
 
@@ -97,10 +140,11 @@
 
 
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+        <script src="./projektarbeit.js" defer></script>
 </body>
 
-</html> 
+</html>
