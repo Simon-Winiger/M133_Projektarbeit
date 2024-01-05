@@ -35,9 +35,44 @@ requestBerufe.onreadystatechange = function () {
     });
   }
 };
+let selectedValue;
 
 Berufsgruppe.addEventListener("change", function () {
-  let selectedValue = Berufsgruppe.value;
+  selectedValue = Berufsgruppe.value;
+  console.log("Ausgewähltes Element", selectedValue);
+
+  // Request nur durchführen, wenn das Element nicht "0 - Bitte wählen" ist
+  if (selectedValue < 1) return;
+
+});
+
+let requestKlassen = new XMLHttpRequest();
+requestKlassen.open("GET", ApiKlassen);
+requestKlassen.send();
+
+const URL = ApiKlassen + "?beruf_id" + selectedValue;
+requestKlassen.open("GET", `${ApiKlassen}?beruf_id${selectedValue}`);
+requestKlassen.send();
+
+requestKlassen.onreadystatechange = function () {
+  if (this.readyState == 4 && requestKlassen.status == 200) {
+    // Parse JSON response
+    const KlassenData = JSON.parse(requestKlassen.responseText);  //JSON.parse wandelt den String in ein Objekt um
+
+    KlassenData.forEach(function (klasse) {
+      const option = document.createElement("option");
+      option.value = klasse.klasse_id; //Gibt dem Option ELement den Wert der Klasse ID
+      option.textContent = klasse.klasse_longname; //Zeigt die Klasse im Dropdown an
+      Klassenauswahl.appendChild(option); //Fügt das Element Option was bisschen oben erstellt wurde zu Berufsgruppe hinzu
+    });
+  }
+};
+
+
+
+
+Klassenauswahl.addEventListener("change", function () {
+  let selectedValue = Klassenauswahl.value;
   console.log("Ausgewähltes Element", selectedValue);
 
   // Request nur durchführen, wenn das Element nicht "0 - Bitte wählen" ist
