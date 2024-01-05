@@ -2,6 +2,7 @@ const ApiBerufe = "http://sandbox.gibm.ch/berufe.php"; //Example could look like
 const ApiKlassen = "http://sandbox.gibm.ch/klassen.php"; //Example could look like http://sandbox.gibm.ch/klassen.php?beruf_id=10
 const ApiTafel = "http://sandbox.gibm.ch/tafel.php"; //Example could look like http://sandbox.gibm.ch/tafel.php?klasse_id=2887489
 const Berufsgruppe = document.getElementById("Berufsgruppe");
+const Klassenauswahl = document.getElementById("Klassenauswahl");
 console.log("Dies ist das Dropdown", Berufsgruppe);
 
 StartseiteButton.addEventListener('mouseover', () => {
@@ -44,20 +45,24 @@ Berufsgruppe.addEventListener("change", function () {
   // Request nur durchführen, wenn das Element nicht "0 - Bitte wählen" ist
   if (selectedValue < 1) return;
 
-});
+
+
+const klassenApiUrl = `${ApiKlassen}?beruf_id=${selectedValue}`;
 
 let requestKlassen = new XMLHttpRequest();
-requestKlassen.open("GET", ApiKlassen);
+requestKlassen.open("GET", klassenApiUrl);
 requestKlassen.send();
 
 const URL = ApiKlassen + "?beruf_id" + selectedValue;
 requestKlassen.open("GET", `${ApiKlassen}?beruf_id${selectedValue}`);
-requestKlassen.send();
+requestKlassen.send(); 
 
 requestKlassen.onreadystatechange = function () {
   if (this.readyState == 4 && requestKlassen.status == 200) {
-    // Parse JSON response
     const KlassenData = JSON.parse(requestKlassen.responseText);  //JSON.parse wandelt den String in ein Objekt um
+
+    // Lösche vorhandene Optionen, falls vorhanden
+   //  Klassenauswahl.innerHTML = "";
 
     KlassenData.forEach(function (klasse) {
       const option = document.createElement("option");
@@ -68,14 +73,13 @@ requestKlassen.onreadystatechange = function () {
   }
 };
 
-
-
-
 Klassenauswahl.addEventListener("change", function () {
   let selectedValue = Klassenauswahl.value;
   console.log("Ausgewähltes Element", selectedValue);
 
   // Request nur durchführen, wenn das Element nicht "0 - Bitte wählen" ist
   if (selectedValue < 1) return;
+
+}); 
 
 });
