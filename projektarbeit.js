@@ -53,8 +53,8 @@ let requestKlassen = new XMLHttpRequest();
 requestKlassen.open("GET", klassenApiUrl);
 requestKlassen.send();
 
-const URL = ApiKlassen + "?beruf_id" + selectedValue;
-requestKlassen.open("GET", `${ApiKlassen}?beruf_id${selectedValue}`);
+const URL = ApiKlassen + "?beruf_id=" + selectedValue;
+requestKlassen.open("GET", `${ApiKlassen}?beruf_id=${selectedValue}`);
 requestKlassen.send(); 
 
 requestKlassen.onreadystatechange = function () {
