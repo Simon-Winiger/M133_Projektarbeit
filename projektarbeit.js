@@ -5,6 +5,13 @@ const Berufsgruppe = document.getElementById("Berufsgruppe");
 const Klassenauswahl = document.getElementById("Klassenauswahl");
 console.log("Dies ist das Dropdown", Berufsgruppe);
 
+
+
+
+//#StartseiteButton:hover so angepasst, dass es lightgreen wird;
+
+
+
 StartseiteButton.addEventListener('mouseover', () => {
   // Change the button's background color
   StartseiteButton.style.color = 'lightgreen';
@@ -15,6 +22,9 @@ StartseiteButton.addEventListener('mouseout', () => {
   StartseiteButton.style.color = 'white';
 });
 
+
+
+
 let requestBerufe = new XMLHttpRequest();
 requestBerufe.open("GET", ApiBerufe);
 requestBerufe.send();
@@ -24,11 +34,13 @@ requestBerufe.onreadystatechange = function () {
     // Parse JSON response
     const berufeData = JSON.parse(requestBerufe.responseText);
 
-
-
-
     // Add options from API response
     berufeData.forEach(function (beruf) {
+      /** Wenn value = "" => alle Berufe */
+      if (beruf.beruf_name.length == 0) {
+        beruf.beruf_name = "Alle Klassen anzeigen";
+      }
+
       const option = document.createElement("option");
       option.value = beruf.beruf_id; //Gibt dem Option ELement den Wert der Beruf ID
       option.textContent = beruf.beruf_name; //Zeigt den Beruf im Dropdown an
@@ -36,6 +48,8 @@ requestBerufe.onreadystatechange = function () {
     });
   }
 };
+
+
 let selectedValue;
 
 Berufsgruppe.addEventListener("change", function () {
@@ -47,31 +61,33 @@ Berufsgruppe.addEventListener("change", function () {
 
 
 
-const klassenApiUrl = `${ApiKlassen}?beruf_id=${selectedValue}`;
+  // const klassenApiUrl = `${ApiKlassen}?beruf_id=${selectedValue}`;
 
-let requestKlassen = new XMLHttpRequest();
-requestKlassen.open("GET", klassenApiUrl);
-requestKlassen.send();
+  // requestKlassen.open("GET", klassenApiUrl);
+  // requestKlassen.send();
 
-const URL = ApiKlassen + "?beruf_id=" + selectedValue;
-requestKlassen.open("GET", `${ApiKlassen}?beruf_id=${selectedValue}`);
-requestKlassen.send(); 
+  const klassenApiUrl = ApiKlassen + "?beruf_id=" + selectedValue;
+  let requestKlassen = new XMLHttpRequest();
+  requestKlassen.open("GET", klassenApiUrl);
+  requestKlassen.send();
 
-requestKlassen.onreadystatechange = function () {
-  if (this.readyState == 4 && requestKlassen.status == 200) {
-    const KlassenData = JSON.parse(requestKlassen.responseText);  //JSON.parse wandelt den String in ein Objekt um
+  requestKlassen.onreadystatechange = function () {
+    if (this.readyState == 4 && requestKlassen.status == 200) {
+      const KlassenData = JSON.parse(requestKlassen.responseText);  //JSON.parse wandelt den String in ein Objekt um
 
-    // Lösche vorhandene Optionen, falls vorhanden
-   //  Klassenauswahl.innerHTML = "";
+      // Lösche vorhandene Optionen, falls vorhanden
+      Klassenauswahl.innerHTML = "";
 
-    KlassenData.forEach(function (klasse) {
-      const option = document.createElement("option");
-      option.value = klasse.klasse_id; //Gibt dem Option ELement den Wert der Klasse ID
-      option.textContent = klasse.klasse_longname; //Zeigt die Klasse im Dropdown an
-      Klassenauswahl.appendChild(option); //Fügt das Element Option was bisschen oben erstellt wurde zu Berufsgruppe hinzu
-    });
-  }
-};
+      KlassenData.forEach(function (klasse) {
+        const option = document.createElement("option");
+        option.value = klasse.klasse_id; //Gibt dem Option ELement den Wert der Klasse ID
+        option.textContent = klasse.klasse_longname; //Zeigt die Klasse im Dropdown an
+        Klassenauswahl.appendChild(option); //Fügt das Element Option was bisschen oben erstellt wurde zu Berufsgruppe hinzu
+      });
+    }
+  };
+});
+
 
 Klassenauswahl.addEventListener("change", function () {
   let selectedValue = Klassenauswahl.value;
@@ -80,6 +96,25 @@ Klassenauswahl.addEventListener("change", function () {
   // Request nur durchführen, wenn das Element nicht "0 - Bitte wählen" ist
   if (selectedValue < 1) return;
 
-}); 
+
+  /**
+   * Hinzugefügt
+   */
+  const tafelApiUrl = ApiTafel + "?klasse_id=" + selectedValue;
+  let requestTafel = new XMLHttpRequest();
+  requestTafel.open("GET", tafelApiUrl);
+  requestTafel.send();
+
+  requestTafel.onreadystatechange = function () {
+    if (this.readyState == 4 && requestTafel.status == 200) {
+      const TafelData = JSON.parse(requestTafel.responseText);  //JSON.parse wandelt den String in ein Objekt um
+
+      console.log(TafelData)
+
+      // TafelData.forEach(function (tafel) {
+      //   
+      // });
+    }
+  };
 
 });
