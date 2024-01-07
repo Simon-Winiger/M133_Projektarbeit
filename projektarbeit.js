@@ -3,6 +3,7 @@ const ApiKlassen = "http://sandbox.gibm.ch/klassen.php"; //Example could look li
 const ApiTafel = "http://sandbox.gibm.ch/tafel.php"; //Example could look like http://sandbox.gibm.ch/tafel.php?klasse_id=2887489
 const Berufsgruppe = document.getElementById("Berufsgruppe");
 const Klassenauswahl = document.getElementById("Klassenauswahl");
+const StundenplanInfo = document.getElementById("StundenplanInfo");
 console.log("Dies ist das Dropdown", Berufsgruppe);
 
 
@@ -48,7 +49,6 @@ requestBerufe.onreadystatechange = function () {
     });
   }
 };
-
 
 let selectedValue;
 
@@ -96,10 +96,8 @@ Klassenauswahl.addEventListener("change", function () {
   // Request nur durchführen, wenn das Element nicht "0 - Bitte wählen" ist
   if (selectedValue < 1) return;
 
+//
 
-  /**
-   * Hinzugefügt
-   */
   const tafelApiUrl = ApiTafel + "?klasse_id=" + selectedValue;
   let requestTafel = new XMLHttpRequest();
   requestTafel.open("GET", tafelApiUrl);
@@ -111,10 +109,28 @@ Klassenauswahl.addEventListener("change", function () {
 
       console.log(TafelData)
 
-      // TafelData.forEach(function (tafel) {
-      //   
-      // });
+      TafelData.forEach(function (tafel) {
+        const option = document.createElement("option");
+        option.value = tafel.tafel_id;
+        option.textContent = tafel.tafel_datum;
+        option.textContent = tafel.tafel_wochentag;
+        option.textContent = tafel.tafel_von;
+        option.textContent = tafel.tafel_bis;
+        option.textContent = tafel.tafel_lehrer;
+        option.textContent = tafel.tafel_longfach;
+        option.textContent = tafel.tafel_raum;
+        option.textContent = tafel.tafel_kommentar;
+        StundenplanInfo.appendChild(option);
+      });
     }
   };
+});
 
+StundenplanInfo.addEventListener("change", function () {
+  let selectedValue = StundenplanInfo.value;
+  document.getElementById("StundenplanInfo").innerHTML = this.responseText;
+  console.log("Ausgewähltes Element", selectedValue);
+
+  // Request nur durchführen, wenn das Element nicht "0 - Bitte wählen" ist
+  if (selectedValue < 1) return;
 });
